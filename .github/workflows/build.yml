@@ -14,4 +14,4 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           port: 80
           script: |
-            ls
+            git status
