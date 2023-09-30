@@ -2,7 +2,7 @@ name: Build and Debloy
 on: [push, workflow_dispatch]
 jobs:
   deploy:
-    steps: 
+    runs-on: ubuntu-latest
+    steps:
       - name: connect to server
         run: ssh root@46.148.238.104
-        
