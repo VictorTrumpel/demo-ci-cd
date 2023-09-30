@@ -5,4 +5,4 @@ jobs:
     runs-on: ubutntu-latest
     steps:
       - name: Print context
-        run: echo "${{ github }}"
+        run: echo "${{ toJSON(github) }}"
