@@ -1,8 +1,17 @@
-name: Build and Debloy
-on: [push, workflow_dispatch]
+name: Node.js CD
+
+on: push
+
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: connect to server
-        run: ssh root@46.148.238.104
+      - name: Deploy using ssh
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          port: 80
+          script: |
+            ls
