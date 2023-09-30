@@ -2,7 +2,7 @@ name: Print Pull Request Context
 on: workflow_dispatch
 jobs:
   print:
-    runs-on: ubutntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Print context
         run: echo "${{ toJSON(github) }}"
