@@ -1,25 +1,8 @@
 name: Build and Debloy
 on: [push, workflow_dispatch]
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get code
-        uses: actions/checkout@v3
-      - name: Install deps
-        run: npm ci
-      - name: Build project
-        run: npm run build
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          path: build
-          name: build-files
   deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get build project
-        uses: actions/download-artifact@v3
-        with:
-          name: build-files
+    steps: 
+      - name: connect to server
+        run: ssh root@46.148.238.104
+        
