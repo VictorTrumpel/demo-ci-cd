@@ -1,10 +1,11 @@
 name: Deploy
 
-on: workflow_dispatch:
-  inputs:
-    branchName: 
-      description: 'Ветка, которую нужно развернуть'
-      required: true
+on:
+  workflow_dispatch:
+    inputs:
+      branchName:
+        description: "Ветка, которую нужно развернуть"
+        required: true
 
 jobs:
   build:
