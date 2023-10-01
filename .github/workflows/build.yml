@@ -1,7 +1,3 @@
-script: |
-  export NVM_DIR=~/.nvm
-  source ~/.nvm/nvm.sh                
-
 name: Node.js CD
 
 on: push
@@ -19,6 +15,8 @@ jobs:
           script: |
             cd ..
             ls
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh    
             npm -v
             # rm -r demo-ci-cd
             # git clone https://github.com/VictorTrumpel/demo-ci-cd
