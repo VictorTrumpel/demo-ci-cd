@@ -1,6 +1,10 @@
 name: Node.js CD
 
-on: push
+on: workflow_dispatch:
+  inputs:
+    branchName: 
+      description: 'Ветка, которую нужно развернуть'
+      required: true
 
 jobs:
   build:
@@ -17,7 +21,7 @@ jobs:
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh    
             { if [ -d demo-ci-cd ]; then rm -r demo-ci-cd; fi; }
-            git clone https://github.com/VictorTrumpel/demo-ci-cd
+            git clone https://github.com/VictorTrumpel/demo-ci-cd -b ${{ inputs.branchName }}
             cd demo-ci-cd
             npm i
             npm run build
