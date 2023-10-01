@@ -14,14 +14,12 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           script: |
             cd ..
-            ls
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh    
-            npm -v
-            # rm -r demo-ci-cd
-            # git clone https://github.com/VictorTrumpel/demo-ci-cd
-            # cd demo-ci-cd
-            # npm i
-            # npm run build
-            # rm -r ../../var/www/build
-            # mv build ../../var/www
+            { if [ -d demo-ci-cd ]; then rm -r demo-ci-cd; fi; }
+            git clone https://github.com/VictorTrumpel/demo-ci-cd
+            cd demo-ci-cd
+            npm i
+            npm run build
+            rm -r ../../var/www/build
+            mv build ../../var/www
