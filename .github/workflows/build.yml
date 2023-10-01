@@ -1,3 +1,7 @@
+script: |
+  export NVM_DIR=~/.nvm
+  source ~/.nvm/nvm.sh                
+
 name: Node.js CD
 
 on: push
