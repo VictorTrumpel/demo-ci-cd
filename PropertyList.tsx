@@ -1,29 +1,44 @@
-import { useMemo, useRef } from 'react';
-import { observer } from 'mobx-react-lite';
-import { Collapse, CollapseProps, Descriptions, DescriptionsProps, Space, Typography } from 'antd';
-import { PropertyItem } from './PropertyItem';
-import { Properties as Prop } from '@/shared/types';
-import { toJS } from 'mobx';
-import './PropertyList.scss';
-import { DescriptionsItemType } from 'antd/es/descriptions';
+import { useMemo, useRef } from "react";
+import { observer } from "mobx-react-lite";
+import {
+  Collapse,
+  CollapseProps,
+  Descriptions,
+  DescriptionsProps,
+  Space,
+  Typography,
+} from "antd";
+import { PropertyItem } from "./PropertyItem";
+import { Properties as Prop } from "@/shared/types";
+import { toJS } from "mobx";
+import "./PropertyList.scss";
+import { DescriptionsItemType } from "antd/es/descriptions";
 
-const keys = new Set(['name', 'entitytype', 'globalid', 'translatedtype', 'type', 'objectype']);
+const keys = new Set([
+  "name",
+  "entitytype",
+  "globalid",
+  "translatedtype",
+  "type",
+  "objectype",
+]);
 interface PropertyListProps {
   properties: Prop;
 }
 
 export const PropertyList = observer(({ properties }: PropertyListProps) => {
   const { collapseItems, descrItems } = useMemo(() => {
-    const descrItems: [null | DescriptionsItemType, ...DescriptionsItemType[]] = [null];
-    const collapseItems: CollapseProps['items'] = [];
+    const descrItems: [null | DescriptionsItemType, ...DescriptionsItemType[]] =
+      [null];
+    const collapseItems: CollapseProps["items"] = [];
 
     Object.entries(properties).forEach(([key, value]) => {
       key = key.toLowerCase();
 
-      const isDescrItem = typeof value === 'string';
+      const isDescrItem = typeof value === "string";
 
       if (isDescrItem) {
-        const isDescrName = key === 'name';
+        const isDescrName = key === "name";
 
         isDescrName
           ? (descrItems[0] = createDescrName(key, value))
@@ -46,15 +61,20 @@ export const PropertyList = observer(({ properties }: PropertyListProps) => {
   }, [properties]);
 
   return (
-    <Space direction='vertical' className='property-container'>
+    <Space direction="vertical" className="property-container">
       <Descriptions
         items={descrItems as DescriptionsItemType[]}
-        size='small'
+        size="small"
         column={1}
-        layout='horizontal'
+        layout="horizontal"
         bordered
       />
-      <Collapse accordion size='small' items={collapseItems} className='property-list' />
+      <Collapse
+        accordion
+        size="small"
+        items={collapseItems}
+        className="property-list"
+      />
     </Space>
   );
 });
@@ -62,11 +82,10 @@ export const PropertyList = observer(({ properties }: PropertyListProps) => {
 const createDescrItem = (key: string, value: string): DescriptionsItemType => ({
   key,
   label: key,
-  children: <p className='spreadName'>{value}</p>,
+  children: <p className="spreadName">{value}</p>,
 });
 
 const createDescrName = (key: string, value: string): DescriptionsItemType => ({
-  key,
-  label: key,
-  children: <Typography.Text className='spreadName'>{value}</Typography.Text>,
+  ...createDescrItem(key, value),
+  children: <Typography.Text className="spreadName">{value}</Typography.Text>,
 });
